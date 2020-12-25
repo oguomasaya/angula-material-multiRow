@@ -9,16 +9,12 @@ import { MatTable } from '@angular/material/table';
 })
 export class AppComponent implements AfterViewInit {
   @ViewChild(MatTable) table: MatTable<any>;
-  @ViewChildren('box') box: QueryList<ElementRef>;
-  @ViewChild('1') i1: ElementRef;
-  constructor(private cd: ChangeDetectorRef) {
 
+  constructor(private cd: ChangeDetectorRef) {
   }
+
   ngAfterViewInit(): void {
-    console.log();
-    this.box.forEach(d => {
-      console.log(d);
-    })
+    console.log(this.table);
   }
 
   selection = new SelectionModel<any>(true, []);
@@ -143,4 +139,5 @@ export class AppComponent implements AfterViewInit {
     });
     this.table.renderRows()
   }
+
 }
