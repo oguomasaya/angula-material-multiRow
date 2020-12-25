@@ -1,20 +1,26 @@
-import { HEADER_COLUMNS } from './table.definition';
+import { FocusInOrder, HEADER_COLUMNS, InitData } from './table.definition';
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { MatTable } from '@angular/material/table';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, Directive, ElementRef, HostListener, Inject, Input, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+
+interface rowSelector {
+  row: number
+  cellId: string
+}
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements AfterViewInit {
-  @ViewChild(MatTable) table: MatTable<any>;
+  @ViewChild('table') table: MatTable<any>;
 
-  constructor(private cd: ChangeDetectorRef) {
+  constructor(private cd: ChangeDetectorRef, private renderer: Renderer2) {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.table);
   }
 
   selection = new SelectionModel<any>(true, []);
@@ -25,55 +31,25 @@ export class AppComponent implements AfterViewInit {
   rowBodyDef1: string[] = ["jyuKbnCd", "itemCd", "itemNm", "suu", "unit", "jyuTan", "jyuKin", "syoZei", "tyuNum", "memo", "kanno"];
   rowBodyDef2: string[] = ["jyuKbnNm", "dummy1", "kikaku", "kazeiKbn", "zeirituCd", "zeirituNm", "dummy2", "genTan", "genKin", "araKin", "jyuNou"];
 
-  transactions: any[] = [
-    {
-      jyuKbnCd: "1",
-      itemCd: '1',
-      itemNm: 'a',
-      suu: "",
-      unit: "",
-      jyuTan: "",
-      jyuKin: "",
-      syoZei: "",
-      tyuNum: "",
-      memo: "",
-      kanno: "",
-      jyuKbnNm: 'a',
-      kikaku: 'a',
-      kazeiKbn: 'a',
-      zeirituCd: "1",
-      zeirituNm: "0.8%",
-      genTan: "",
-      genKin: "",
-      araKin: "",
-      jyuNou: "",
-      dummy1: "",
-      dummy2: ""
-    }, {
-      jyuKbnCd: "1",
-      itemCd: '1',
-      itemNm: 'a',
-      suu: "",
-      unit: "",
-      jyuTan: "",
-      jyuKin: "",
-      syoZei: "",
-      tyuNum: "",
-      memo: "",
-      kanno: "",
-      jyuKbnNm: 'a',
-      kikaku: 'a',
-      kazeiKbn: 'a',
-      zeirituCd: "1",
-      zeirituNm: "0.8%",
-      genTan: "",
-      genKin: "",
-      araKin: "",
-      jyuNou: "",
-      dummy1: "",
-      dummy2: ""
+  transactions = new MatTableDataSource([InitData, InitData, InitData])
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    const focusTerget = this.getNextFocusTerget(event);
+    const _targetCell = document.getElementById(focusTerget.cellId + "-" + String(focusTerget.row));
+    if ((event.key === 'Tab' || event.key === 'Enter') && _targetCell) {
+      event.preventDefault();
+      if (_targetCell) {
+        setTimeout(() => {
+          document.getElementById(focusTerget.cellId + "-" + String(focusTerget.row)).focus();
+        }, 0);
+      }
+    } else if (_targetCell === null) {
+      setTimeout(() => {
+        document.getElementById('btn').focus();
+      }, 0)
     }
-  ];
+  }
 
 
   getHeaderColumnsJPWord(key: string) {
@@ -82,25 +58,25 @@ export class AppComponent implements AfterViewInit {
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.transactions.length;
-    return numSelected === numRows;
+    // const numSelected = this.selection.selected.length;
+    // const numRows = this.transactions.length;
+    // return numSelected === numRows;
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected()
-      ? this.selection.clear()
-      : this.transactions.forEach(row => this.selection.select(row));
+    // this.isAllSelected()
+    //   ? this.selection.clear()
+    //   : this.transactions.forEach(row => this.selection.select(row));
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: any): string {
-    if (!row) {
-      return `${this.isAllSelected() ? "select" : "deselect"} all`;
-    }
-    return `${this.selection.isSelected(row) ? "deselect" : "select"
-      } row ${row.no + 1}`;
+  checkboxLabel(row?: any) {
+    // if (!row) {
+    //   return `${this.isAllSelected() ? "select" : "deselect"} all`;
+    // }
+    // return `${this.selection.isSelected(row) ? "deselect" : "select"
+    //   } row ${row.no + 1}`;
   }
 
   isEven(num: number): boolean {
@@ -113,31 +89,39 @@ export class AppComponent implements AfterViewInit {
   }
 
   addData() {
-    this.transactions.push({
-      jyuKbnCd: "1",
-      itemCd: '1',
-      itemNm: 'a',
-      suu: "",
-      unit: "",
-      jyuTan: "",
-      jyuKin: "",
-      syoZei: "",
-      tyuNum: "",
-      memo: "",
-      kanno: "",
-      jyuKbnNm: 'a',
-      kikaku: 'a',
-      kazeiKbn: 'a',
-      zeirituCd: "1",
-      zeirituNm: "0.8%",
-      genTan: "",
-      genKin: "",
-      araKin: "",
-      jyuNou: "",
-      dummy1: "",
-      dummy2: ""
-    });
-    this.table.renderRows()
+    this.transactions.data.push(InitData);
+    this.table.renderRows();
+  }
+
+
+  conversionId(key: string): rowSelector {
+    const _ = key.split('-')
+    return {
+      row: Number(_[1]),
+      cellId: _[0]
+    }
+  }
+
+  getNextFocusTerget(event: KeyboardEvent): rowSelector {
+    const _selector = this.conversionId((event.target as Element).id)
+    const currrentClmIndex = FocusInOrder.indexOf(_selector.cellId);
+    if (FocusInOrder[currrentClmIndex + 1]) {
+      return {
+        row: _selector.row,
+        cellId: FocusInOrder[currrentClmIndex + 1]
+      }
+    } else {
+      return {
+        row: Number(_selector.row) + 1,
+        cellId: FocusInOrder[0],
+      }
+    }
+  }
+
+  deleteData() {
+    this.transactions.data.splice(1, 1);
+    this.table.renderRows();
+    console.log(this.transactions);
   }
 
 }

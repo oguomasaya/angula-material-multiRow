@@ -45,3 +45,35 @@ export class SalesInputModel {
     araKin: "";
     jyuNou: "";
 }
+
+export const InitData = {
+    jyuKbnCd: "1",
+    itemCd: '1',
+    itemNm: 'a',
+    suu: "",
+    unit: "",
+    jyuTan: "",
+    jyuKin: "",
+    syoZei: "",
+    tyuNum: "",
+    memo: "",
+    kanno: "",
+    jyuKbnNm: 'a',
+    kikaku: 'a',
+    kazeiKbn: 'a',
+    zeirituCd: "1",
+    zeirituNm: "0.8%",
+    genTan: "",
+    genKin: "",
+    araKin: "",
+    jyuNou: "",
+    dummy1: "",
+    dummy2: ""
+}
+
+export const FocusInOrder = [
+    "memo",
+    "jyuKbnCd",
+    "kanno",
+
+]
