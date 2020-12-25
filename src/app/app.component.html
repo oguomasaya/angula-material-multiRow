@@ -1,4 +1,7 @@
-<table mat-table [dataSource]="transactions" multiTemplateDataRows #table>
+<div class="ly_cardGrid hp_gridScroll">
+
+
+<table class="bl_grid hp_gridEdit" mat-table [dataSource]="transactions" multiTemplateDataRows #table>
 
   <!-- <ng-container matColumnDef="select">
     <th mat-header-cell *matHeaderCellDef rowspan="2">
@@ -16,121 +19,121 @@
 
   <ng-container matColumnDef="jyuKbnCd">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('jyuKbnCd')}}</th>
-    <td mat-cell *matCellDef="let transaction; let index = dataIndex" class="el_border"><input
+    <td mat-cell *matCellDef="let transaction; let index = dataIndex"><input
         value="{{transaction.jyuKbnCd}}" id="{{'jyuKbnCd' + index}}"></td>
   </ng-container>
 
   <ng-container matColumnDef="jyuKbnNm">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('jyuKbnNm')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.jyuKbnNm}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.jyuKbnNm}}</td>
   </ng-container>
 
 
   <ng-container matColumnDef="itemCd">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('itemCd')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.itemCd}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.itemCd}}</td>
   </ng-container>
 
   <ng-container matColumnDef="dummy1">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('dummy1')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border"></td>
+    <td mat-cell *matCellDef="let transaction"></td>
   </ng-container>
 
 
   <ng-container matColumnDef="itemNm">
     <th mat-header-cell *matHeaderCellDef style="padding-left: 0px;" colspan="2">{{getHeaderColumnsJPWord('itemNm')}}
     </th>
-    <td mat-cell *matCellDef="let transaction" style="padding-left: 0px;" colspan="2" class="el_border">
+    <td mat-cell *matCellDef="let transaction" style="padding-left: 0px;" colspan="2">
       {{transaction.itemNm}}</td>
   </ng-container>
 
 
   <ng-container matColumnDef="kikaku">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('kikaku')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.kikaku}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.kikaku}}</td>
   </ng-container>
 
 
   <ng-container matColumnDef="kazeiKbn">
     <th mat-header-cell *matHeaderCellDef> {{getHeaderColumnsJPWord('kazeiKbn')}} </th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.kazeiKbn}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.kazeiKbn}}</td>
   </ng-container>
 
   <ng-container matColumnDef="suu">
     <th mat-header-cell *matHeaderCellDef colspan="2">{{getHeaderColumnsJPWord('suu')}}</th>
-    <td mat-cell *matCellDef="let transaction" colspan="2" class="el_border">{{transaction.suu}}</td>
+    <td mat-cell *matCellDef="let transaction" colspan="2">{{transaction.suu}}</td>
   </ng-container>
 
   <ng-container matColumnDef="zeirituCd">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('zeirituCd')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.zeirituCd}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.zeirituCd}}</td>
   </ng-container>
 
   <ng-container matColumnDef="zeirituNm">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('zeirituNm')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.zeirituNm}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.zeirituNm}}</td>
   </ng-container>
 
   <ng-container matColumnDef="unit">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('unit')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.unit}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.unit}}</td>
   </ng-container>
 
   <ng-container matColumnDef="dummy2">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('dummy2')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border"></td>
+    <td mat-cell *matCellDef="let transaction"></td>
   </ng-container>
 
   <ng-container matColumnDef="jyuTan">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('jyuTan')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.jyuTan}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.jyuTan}}</td>
   </ng-container>
 
   <ng-container matColumnDef="genTan">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('genTan')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.genTan}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.genTan}}</td>
   </ng-container>
 
   <ng-container matColumnDef="jyuKin">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('jyuKin')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.jyuKin}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.jyuKin}}</td>
   </ng-container>
 
   <ng-container matColumnDef="genKin">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('genKin')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.genKin}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.genKin}}</td>
   </ng-container>
 
   <ng-container matColumnDef="syoZei">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('syoZei')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.syoZei}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.syoZei}}</td>
   </ng-container>
 
   <ng-container matColumnDef="araKin">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('araKin')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.araKin}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.araKin}}</td>
   </ng-container>
 
   <ng-container matColumnDef="tyuNum">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('tyuNum')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.tyuNum}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.tyuNum}}</td>
   </ng-container>
 
   <ng-container matColumnDef="jyuNou">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('jyuNou')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border">{{transaction.jyuNou}}</td>
+    <td mat-cell *matCellDef="let transaction">{{transaction.jyuNou}}</td>
   </ng-container>
 
   <ng-container matColumnDef="memo">
     <th mat-header-cell *matHeaderCellDef rowspan="2">{{getHeaderColumnsJPWord('memo')}}</th>
-    <td mat-cell *matCellDef="let transaction" class="el_border" rowspan="2">
+    <td mat-cell *matCellDef="let transaction" rowspan="2">
       <textarea></textarea>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="kanno">
     <th mat-header-cell *matHeaderCellDef rowspan="2">{{getHeaderColumnsJPWord('kanno')}}</th>
-    <td mat-cell *matCellDef="let transaction;let i = dataIndex" class="el_border" rowspan="2">
+    <td mat-cell *matCellDef="let transaction;let i = dataIndex" rowspan="2" class="el_center">
       <mat-checkbox id="{{'kanno' + i}}">
       </mat-checkbox>
     </td>
@@ -148,3 +151,5 @@
 
 
 <button (click)="addData()">追加</button>
+
+</div>
