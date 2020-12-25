@@ -18,11 +18,21 @@ table {
   textarea {
     border: none;
     padding: 0;
-    width: 100%;
+
     &:focus {
       outline: none;
     }
   }
+}
+
+// 上書き
+mat-row,
+mat-header-row,
+mat-footer-row,
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  border-bottom-color: #cfd8dc;
 }
 
 //layout
@@ -44,7 +54,7 @@ table {
     color: #455a64;
     font-size: 1.2rem;
     padding: 0.4rem !important;
-    text-align: center;
+    text-align: center !important;
     &:first-child {
       border-left: none;
     }
@@ -55,32 +65,42 @@ table {
   td {
     border-left: 1px solid #cfd8dc;
     border-top: 1px solid #cfd8dc;
-    padding: 0 !important;
+    padding: 0.4rem 0.8rem !important;
+    height: 2.8rem !important;
     input,
     textarea {
-      padding: 0.4rem !important;
+      padding: 0 !important;
       display: block;
-      &:focus {
-        background-color: aqua;
-      }
+      width: calc(100% - 1.6rem);
     }
     input {
       height: 2.8rem !important;
     }
     textarea {
-      height: 5.6rem !important;
+      // border分の高さ
+      height: 5.6rem + 0.8rem + 0.2rem !important;
+      resize: none;
+    }
+  }
+  .el_edit {
+    padding: 0 !important;
+    input,
+    textarea {
+      padding: 0.4rem 0.8rem !important;
+      margin: 0 !important;
+      &:focus {
+        background-color: aqua;
+      }
     }
   }
 }
 
 // 明細部・一覧がスクロールできる場合
 .hp_gridScroll {
-  .mat-cel {
-    // white-space: nowrap;
-  }
   overflow-x: scroll;
   white-space: nowrap;
   table {
+    width: 150%;
     td {
       overflow: hidden;
       min-width: 3.2rem;

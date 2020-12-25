@@ -1,5 +1,5 @@
-<div class="ly_cardGrid hp_gridScroll">
-
+<div class="ly_cardGrid">
+<!-- ↑スクロールさせるにはhp_gridScrollを追加 -->
 
 <table class="bl_grid hp_gridEdit" mat-table [dataSource]="transactions" multiTemplateDataRows #table>
 
@@ -19,7 +19,7 @@
 
   <ng-container matColumnDef="jyuKbnCd">
     <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('jyuKbnCd')}}</th>
-    <td mat-cell *matCellDef="let transaction; let index = dataIndex"><input
+    <td class="el_edit" mat-cell *matCellDef="let transaction; let index = dataIndex"><input
         value="{{transaction.jyuKbnCd}}" id="{{'jyuKbnCd' + index}}"></td>
   </ng-container>
 
@@ -126,7 +126,7 @@
 
   <ng-container matColumnDef="memo">
     <th mat-header-cell *matHeaderCellDef rowspan="2">{{getHeaderColumnsJPWord('memo')}}</th>
-    <td mat-cell *matCellDef="let transaction" rowspan="2">
+    <td  class="el_edit" mat-cell *matCellDef="let transaction" rowspan="2">
       <textarea></textarea>
     </td>
   </ng-container>
