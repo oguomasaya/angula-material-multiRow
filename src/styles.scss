@@ -1,4 +1,142 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html {
+  font-size: 62.5%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 1.4rem;
+  height: 100vh;
+}
+
+// Reset
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  input,
+  textarea {
+    border: none;
+    padding: 0;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+// 上書き
+mat-row,
+mat-header-row,
+mat-footer-row,
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  border-bottom-color: #cfd8dc;
+}
+
+//layout
+.ly_cardGrid {
+  margin: 1.6rem;
+}
+
+//テーブルグリッドの設定
+.bl_grid {
+  border: 1px solid #cfd8dc;
+  width: 100%;
+  tr {
+    height: 2.8rem !important;
+  }
+  th {
+    background-color: #eceff1;
+    padding: 0 !important;
+    border-left: 1px solid #cfd8dc;
+    color: #455a64;
+    font-size: 1.2rem;
+    padding: 0.4rem !important;
+    text-align: center !important;
+    &:first-child {
+      border-left: none;
+    }
+  }
+  tr.selected {
+    background-color: lightblue;
+  }
+  td {
+    border-left: 1px solid #cfd8dc;
+    border-top: 1px solid #cfd8dc;
+    padding: 0.4rem 0.8rem !important;
+    height: 2.8rem !important;
+    input,
+    textarea {
+      padding: 0 !important;
+      display: block;
+      width: calc(100% - 1.6rem);
+    }
+    input {
+      height: 2.8rem !important;
+    }
+    textarea {
+      // border分の高さ
+      height: 5.6rem + 0.8rem + 0.2rem !important;
+      resize: none;
+    }
+  }
+  .el_edit {
+    padding: 0 !important;
+    input,
+    textarea {
+      padding: 0.4rem 0.8rem !important;
+      margin: 0 !important;
+      &:focus {
+        background-color: aqua;
+      }
+    }
+  }
+}
+
+// 明細部・一覧がスクロールできる場合
+.hp_gridScroll {
+  overflow-x: scroll;
+  white-space: nowrap;
+  table {
+    width: 150%;
+    td {
+      overflow: hidden;
+      min-width: 3.2rem;
+    }
+  }
+  .cdk-column-kikaku {
+    min-width: 100px;
+  }
+}
+
+// 明細部が編集できる場合
+// .hp_gridEdit {
+//   th {
+//     overflow: hidden;
+//   }
+//   td {
+//     &:focus {
+//       outline: none;
+//       background-color: lightblue;
+//     }
+//     input {
+//       padding: 0 !important;
+//       height: 2rem !important;
+//       border: none !important;
+//       &:focus {
+//         box-shadow: none !important;
+//         font-family: Roboto, "Helvetica Neue", sans-serif;
+//         width: 100%;
+//       }
+//     }
+//   }
+//   .mat-checkbox {
+//     margin: 0 auto;
+//   }
+// }
+
+.el_center {
+  text-align: center;
+}
