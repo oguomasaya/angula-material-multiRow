@@ -1,0 +1,34 @@
+table {
+  width: 100%;
+  td: {
+    border: solid 1px gainsboro !important;
+  }
+}
+
+.el_border {
+  border: solid 1px gainsboro;
+}
+
+.el_tableHeader {
+  background-color: gainsboro;
+}
+
+.example-first-header-row th {
+  border-bottom: none;
+}
+
+.example-second-header-row {
+  font-style: italic;
+}
+
+.example-first-footer-row {
+  font-weight: bold;
+}
+
+.example-second-footer-row td {
+  color: #900000;
+}
+
+.even-row {
+  background: whitesmoke;
+}
