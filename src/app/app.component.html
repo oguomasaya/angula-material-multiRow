@@ -19,8 +19,8 @@
 
     <ng-container matColumnDef="jyuKbnCd">
       <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('jyuKbnCd')}}</th>
-      <td class="el_edit" mat-cell *matCellDef="let transaction; let index = dataIndex"><input
-          value="{{transaction.jyuKbnCd}}" id="{{'jyuKbnCd-' + index}}"></td>
+      <td class="el_edit" mat-cell *matCellDef="let transaction; let index = dataIndex" tabindex="0"
+        id="{{'jyuKbnCd-' + index}}"><input value="{{transaction.jyuKbnCd}}" id="{{'jyuKbnCd-inp' + index}}"></td>
     </ng-container>
 
     <ng-container matColumnDef="jyuKbnNm">
@@ -31,7 +31,8 @@
 
     <ng-container matColumnDef="itemCd">
       <th mat-header-cell *matHeaderCellDef>{{getHeaderColumnsJPWord('itemCd')}}</th>
-      <td mat-cell *matCellDef="let transaction">{{transaction.itemCd}}</td>
+      <td mat-cell class="el_edit" *matCellDef="let transaction; let index = dataIndex"><input
+          value="{{transaction.itemCd}}" id="{{'itemCd-' + index}}"></td>
     </ng-container>
 
     <ng-container matColumnDef="dummy1">
@@ -134,8 +135,7 @@
     <ng-container matColumnDef="kanno">
       <th mat-header-cell *matHeaderCellDef rowspan="2">{{getHeaderColumnsJPWord('kanno')}}</th>
       <td mat-cell *matCellDef="let transaction;let i = dataIndex" rowspan="2" class="el_center">
-        <mat-checkbox id="{{'kanno-' + i}}">
-        </mat-checkbox>
+        <input type="checkbox" id="{{'kanno-' + i}}">
       </td>
     </ng-container>
 
@@ -150,10 +150,6 @@
   </table>
 
 
-  <<<<<<< HEAD <button (click)="addData()" id="btn">追加</button>
-    <button (click)="deleteData()" id="btn">削除</button>
-    =======
-    <button (click)="addData()">追加</button>
-
+  <button (click)="addData()" id="btn">追加</button>
+  <button (click)="deleteData()" id="btn">削除</button>
 </div>
->>>>>>> develop

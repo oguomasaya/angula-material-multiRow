@@ -72,8 +72,8 @@ export const InitData = {
 }
 
 export const FocusInOrder = [
-    "memo",
     "jyuKbnCd",
-    "kanno",
+    "memo",
+    "itemCd",
 
 ]

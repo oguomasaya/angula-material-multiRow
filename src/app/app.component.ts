@@ -37,17 +37,25 @@ export class AppComponent implements AfterViewInit {
   handleKeyboardEvent(event: KeyboardEvent) {
     const focusTerget = this.getNextFocusTerget(event);
     const _targetCell = document.getElementById(focusTerget.cellId + "-" + String(focusTerget.row));
+
     if ((event.key === 'Tab' || event.key === 'Enter') && _targetCell) {
       event.preventDefault();
       if (_targetCell) {
         setTimeout(() => {
           document.getElementById(focusTerget.cellId + "-" + String(focusTerget.row)).focus();
+
+          // TODO：text 全選択の処理　型は不明。
+          // (document.getElementById(focusTerget.cellId + "-" + String(focusTerget.row)) as any).select();
         }, 0);
       }
     } else if (_targetCell === null) {
       setTimeout(() => {
         document.getElementById('btn').focus();
       }, 0)
+    } else if (event.key === 'Control') {
+      const _focusTerget = this.getNextFocusTerget(event, -1);
+      console.log(_focusTerget);
+      document.getElementById(_focusTerget.cellId + "-inp" + String(_focusTerget.row)).focus();
     }
   }
 
@@ -102,13 +110,13 @@ export class AppComponent implements AfterViewInit {
     }
   }
 
-  getNextFocusTerget(event: KeyboardEvent): rowSelector {
+  getNextFocusTerget(event: KeyboardEvent, dir: number = 0): rowSelector {
     const _selector = this.conversionId((event.target as Element).id)
     const currrentClmIndex = FocusInOrder.indexOf(_selector.cellId);
     if (FocusInOrder[currrentClmIndex + 1]) {
       return {
         row: _selector.row,
-        cellId: FocusInOrder[currrentClmIndex + 1]
+        cellId: FocusInOrder[currrentClmIndex + 1 + dir]
       }
     } else {
       return {
