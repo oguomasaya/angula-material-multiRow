@@ -6,6 +6,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 interface rowSelector {
   row: number
   cellId: string
+  type?: string
 }
 
 
@@ -33,29 +34,43 @@ export class AppComponent implements AfterViewInit {
 
   transactions = new MatTableDataSource([InitData, InitData, InitData])
 
+
+
+  /**
+   * 
+   * フォーカス移動　Tab or Enter
+   * Tab Enter以外のキー入力はあった場合で入力可能フォームの上であればフォームにフォーカスをあてる
+   * 
+   */
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     const focusTerget = this.getNextFocusTerget(event);
-    const _targetCell = document.getElementById(focusTerget.cellId + "-" + String(focusTerget.row));
+    const _targetCell = document.getElementById(focusTerget.cellId + "-" + "box-" + String(focusTerget.row));
+    if (event.shiftKey && event.key === 'Tab') {
 
-    if ((event.key === 'Tab' || event.key === 'Enter') && _targetCell) {
+      const focusTerget = this.getNextFocusTerget(event, -2);
+      event.preventDefault();
+      document.getElementById(focusTerget.cellId + "-" + "box-" + String(focusTerget.row)).focus();
+
+    } else if ((event.key === 'Tab' || event.key === 'Enter') && _targetCell) {
       event.preventDefault();
       if (_targetCell) {
         setTimeout(() => {
-          document.getElementById(focusTerget.cellId + "-" + String(focusTerget.row)).focus();
+          document.getElementById(focusTerget.cellId + "-" + "box-" + String(focusTerget.row)).focus();
 
           // TODO：text 全選択の処理　型は不明。
           // (document.getElementById(focusTerget.cellId + "-" + String(focusTerget.row)) as any).select();
         }, 0);
       }
-    } else if (_targetCell === null) {
-      setTimeout(() => {
-        document.getElementById('btn').focus();
-      }, 0)
     } else if (event.key === 'Control') {
-      const _focusTerget = this.getNextFocusTerget(event, -1);
-      console.log(_focusTerget);
-      document.getElementById(_focusTerget.cellId + "-inp" + String(_focusTerget.row)).focus();
+      const _focusTerget = this.getCtrlFocusTerget(event);
+      document.getElementById(_focusTerget.cellId + "-inp-" + String(_focusTerget.row)).focus();
+    } else if (event.key === 'ArrowDown') {
+      const _focusTerget = this.getArrowNextFocusTerget(event, 1);
+      document.getElementById(_focusTerget.cellId + "-box-" + String(_focusTerget.row)).focus();
+    } else if (event.key === 'ArrowUp') {
+      const _focusTerget = this.getArrowNextFocusTerget(event, -1);
+      document.getElementById(_focusTerget.cellId + "-box-" + String(_focusTerget.row)).focus();
     }
   }
 
@@ -105,31 +120,82 @@ export class AppComponent implements AfterViewInit {
   conversionId(key: string): rowSelector {
     const _ = key.split('-')
     return {
-      row: Number(_[1]),
-      cellId: _[0]
+      row: Number(_[2]),
+      cellId: _[0],
+      type: _[1]
     }
   }
 
+  /**
+   * 
+   * @param event 
+   * @param dir デフォルト０　-1は逆方向
+   */
   getNextFocusTerget(event: KeyboardEvent, dir: number = 0): rowSelector {
     const _selector = this.conversionId((event.target as Element).id)
     const currrentClmIndex = FocusInOrder.indexOf(_selector.cellId);
+    if (dir < 0) {
+      if (FocusInOrder[currrentClmIndex + 1 + dir]) {
+        return {
+          row: _selector.row,
+          cellId: FocusInOrder[currrentClmIndex + 1 + dir],
+          type: _selector.type
+        }
+      } else {
+        return {
+          row: _selector.row - 1,
+          cellId: FocusInOrder[FocusInOrder.length - 1],
+          type: _selector.type
+        }
+      }
+    }
     if (FocusInOrder[currrentClmIndex + 1]) {
       return {
         row: _selector.row,
-        cellId: FocusInOrder[currrentClmIndex + 1 + dir]
+        cellId: FocusInOrder[currrentClmIndex + 1 + dir],
+        type: _selector.type
       }
     } else {
       return {
         row: Number(_selector.row) + 1,
         cellId: FocusInOrder[0],
+        type: _selector.type
       }
+    }
+  }
+
+  getArrowNextFocusTerget(event: KeyboardEvent, dir: number = 0): rowSelector {
+    const _selector = this.conversionId((event.target as Element).id)
+    const currrentClmIndex = FocusInOrder.indexOf(_selector.cellId);
+
+    if (dir > 0) {
+      return {
+        row: Number(_selector.row) + 1,
+        cellId: FocusInOrder[currrentClmIndex],
+        type: _selector.type
+      }
+    } else {
+      return {
+        row: Number(_selector.row) - 1,
+        cellId: FocusInOrder[currrentClmIndex],
+        type: _selector.type
+      }
+    }
+  }
+
+  getCtrlFocusTerget(event: KeyboardEvent) {
+    const _selector = this.conversionId((event.target as Element).id)
+    const currrentClmIndex = FocusInOrder.indexOf(_selector.cellId);
+    return {
+      row: _selector.row,
+      cellId: FocusInOrder[currrentClmIndex],
+      type: _selector.type
     }
   }
 
   deleteData() {
     this.transactions.data.splice(1, 1);
     this.table.renderRows();
-    console.log(this.transactions);
   }
 
 }
